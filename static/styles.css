@@ -1,0 +1,61 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.team {
+    background: #111;
+    padding: 10px;
+    width: 30%;
+}
+
+.team h2 {
+    background: #222;
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+}
+
+.episode {
+    border-top: 2px dashed #444;
+    padding: 10px;
+    position: relative;
+}
+
+.episode-number {
+    font-size: 20px;
+}
+
+.time {
+    background-color: #004400;
+    color: #00FF00;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.runner {
+    float: right;
+    background-color: #4444FF;
+    color: #FFFFFF;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.pending .time {
+    background-color: #222222;
+}
+
+.completed {
+    color: #00FF00;
+}
+
+.pending {
+    color: #555555;
+}

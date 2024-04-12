@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Episode Times</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        {% for team, episodes in data.items() %}
+        <div class="team">
+            <h2>{{ team.upper() }}</h2>
+            {% for episode in ['E1', 'E2', 'E4', 'E6', 'E3', 'E5'] %}
+            <div class="episode {{ 'completed' if episodes[episode]['time'] != '--:--' else 'pending' }}">
+                <span class="episode-number">{{ episode }}</span>
+                <span class="time">{{ episodes[episode]['time'] }}</span>
+                <span class="runner">{{ episodes[episode]['runner'] }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

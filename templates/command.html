@@ -1,0 +1,37 @@
+<!-- command.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Command</title>
+</head>
+<body>
+    <h1>Enter Run Data</h1>
+    <form action="{{ url_for('command') }}" method="post">
+        <table>
+            <tr>
+                <th>Episode</th>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Team 3</th>               
+            </tr>
+            {% for i in [1, 2, 4, 6, 3, 5] %}
+            <tr>
+                <td>E{{ i }}</td>
+                {% for team_num in range(1, 4) %}
+                <td>
+                    Runner: <input type="text" name="team{{ team_num }}_runner{{ i }}"
+                        value="{{ data.get('team{}_runner{}'.format(team_num, i), '') }}" required>
+                    Time: <input type="text" name="team{{ team_num }}_time{{ i }}"
+                        pattern="\d{2}:\d{2}|--:--" placeholder="MM:SS"
+                        value="{{ data.get('team{}_time{}'.format(team_num, i), '--:--') }}" required>
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Save Data">
+    </form>
+</body>
+</html>
