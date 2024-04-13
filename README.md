@@ -45,4 +45,4 @@ Contributions are welcome! Feel free to fork this repository, make changes, and 
 
 ## License
 
-This project is open-sourced under the MIT License - see the License [License] for details.
+This project is open-sourced under the [GNU General Public License v3.0](LICENSE).
