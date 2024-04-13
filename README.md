@@ -13,9 +13,9 @@ This web application, built using Flask, is specifically designed to track indiv
 
 Ensure you have Python and Flask installed to run this application. You can install Flask using the following command:
 
-\`\`\`
+```
 pip install Flask
-\`\`\`
+```
 
 ## Running the Application
 
@@ -23,17 +23,17 @@ Follow these steps to get the application running:
 
 1. Download the application files to your local machine and navigate to the app's directory.
 2. Start the server with:
-   \`\`\`
+   ```
    python app.py
-   \`\`\`
+   ```
 3. Access the application through `http://127.0.0.1:5000/` in your web browser.
 
 ## Application Endpoints
 
-- \`/\`: Main page that loads and displays data from \`data.json\`.
-- \`/command\`: Handles data updates via POST and displays current data via GET.
-- \`/data\`: Provides current data in JSON format via GET.
-- \`/data-last-modified\`: Returns the timestamp of the last data modification via GET.
+- `/`: Main page that loads and displays data from \`data.json\`.
+- `/command`: Handles data updates via POST and displays current data via GET.
+- `/data`: Provides current data in JSON format via GET.
+- `/data-last-modified`: Returns the timestamp of the last data modification via GET.
 
 ## Usage
 
