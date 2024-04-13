@@ -1,35 +1,35 @@
 {
-    "start_time": "2024-12-30T23:59:59.000Z",
+    "start_time": "2024-04-13T00:00:00.000Z",
     "team1": {
         "E1": {
             "runner": "Anonymous",
-            "end_time": "2024-12-31T00:15:50.000Z"
+            "end_time": "2024-04-13T00:15:50.000Z"
         },
         "E2": {
             "runner": "Garrison",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:50.000Z"
         },
         "E4": {
             "runner": "Core",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:51.000Z"
         },
         "E6": {
             "runner": "Anonymous",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:52.000Z"
         },
         "E3": {
             "runner": "Garrison",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:53.000Z"
         },
         "E5": {
             "runner": "Core",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:54.000Z"
         }
     },
     "team2": {
         "E1": {
             "runner": "Charzight",
-            "end_time": ""
+            "end_time": "2024-04-13T01:15:50.000Z"
         },
         "E2": {
             "runner": "GildetPhantom",

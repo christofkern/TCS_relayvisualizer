@@ -66,7 +66,7 @@ table td {
     background-color: #79addc;
 }
 
-.separator, .separatorDone, .seperatorActive {
+.separator, .separatorDone, .separatorActive {
     position: relative; 
     height: 25px; 
 }

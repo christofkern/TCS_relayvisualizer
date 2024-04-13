@@ -2,8 +2,12 @@ const timerDisplay = document.getElementById('timer');
 const startButton = document.getElementById('startButton');
 let timerInterval = null;
 
-function startTimer(startTime) {
-    clearInterval(timerInterval);  // Clear existing timer interval if any
+function startTimer(startTime = null) {
+    if (! (startTime instanceof Date) | isNaN(startTime) ) {
+        timerDisplay.textContent == "00:00:00";
+        return;
+    } 
+    clearInterval(timerInterval); 
     let diff;
 
     timerInterval = setInterval(() => {
@@ -15,8 +19,13 @@ function startTimer(startTime) {
     }, 1000);
 }
 
-// Initial start time setup
-startTimer(new Date("2024-12-31T00:15:50.000Z"));
+
+fetch('/data')
+.then(response => response.json())
+.then(jsonData => {
+    // Initial start time setup, if the race is already on
+    startTimer(new Date(jsonData.start_time));
+});
 
 startButton.addEventListener('click', () => {
     startTimer(new Date());
