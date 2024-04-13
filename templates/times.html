@@ -5,9 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Episode Times</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var lastKnownModification = null;
+    
+        function fetchDataModificationTime() {
+            fetch('{{ url_for('data_last_modified') }}')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Fetched Last Modified Time:", data.lastModified);
+                    console.log("Last Known Modification Time:",lastKnownModification);
+                    if (lastKnownModification === null) {
+                        lastKnownModification = data.lastModified;
+                        
+                    } else if (lastKnownModification !== data.lastModified) {
+                        window.location.reload();
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching modification time:", error);
+                });
+        }
+    
+        // Check every 10 seconds
+        setInterval(fetchDataModificationTime, 10000);
+    });
+    </script>
+    
 </head>
 <body>
-    <div class="container">
+    <div class="container">  
         {% for team, episodes in data.items() %}
         <div class="team">
             <h2>{{ team.upper() }}</h2>
@@ -21,5 +50,6 @@
         </div>
         {% endfor %}
     </div>
+    <button onclick="window.open('{{ url_for('command') }}', '_blank')">Edit Data</button>
 </body>
 </html>

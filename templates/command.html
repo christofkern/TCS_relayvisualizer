@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Command</title>
 </head>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('yourFormId');  // Make sure your form has an ID
+        form.onsubmit = function(event) {
+            event.preventDefault();  // Prevent the default form submission
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: {
+                    'Accept': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.close) {
+                    window.close();  // This will close the tab if the server responded with the close signal
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        };
+    });
+    </script>
+    
+
 <body>
     <h1>Enter Run Data</h1>
     <form action="{{ url_for('command') }}" method="post">
@@ -22,10 +48,10 @@
                 {% for team_num in range(1, 4) %}
                 <td>
                     Runner: <input type="text" name="team{{ team_num }}_runner{{ i }}"
-                        value="{{ data.get('team{}_runner{}'.format(team_num, i), '') }}" required>
+                           value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('runner', '') }}" required>
                     Time: <input type="text" name="team{{ team_num }}_time{{ i }}"
-                        pattern="\d{2}:\d{2}|--:--" placeholder="MM:SS"
-                        value="{{ data.get('team{}_time{}'.format(team_num, i), '--:--') }}" required>
+                           pattern="\d{2}:\d{2}|--:--" placeholder="MM:SS"
+                           value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('time', '--:--') }}" required>
                 </td>
                 {% endfor %}
             </tr>

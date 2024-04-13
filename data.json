@@ -1,1 +1,80 @@
-{"team1_runner1": "Anonymous", "team1_time1": "--:--", "team2_runner1": "Charzight", "team2_time1": "--:--", "team3_runner1": "Jablaky", "team3_time1": "--:--", "team1_runner2": "Garrison", "team1_time2": "--:--", "team2_runner2": "GildetPhantom", "team2_time2": "--:--", "team3_runner2": "Saber", "team3_time2": "--:--", "team1_runner4": "Core", "team1_time4": "--:--", "team2_runner4": "Charzight", "team2_time4": "--:--", "team3_runner4": "Jablaky", "team3_time4": "--:--", "team1_runner6": "Anonymous", "team1_time6": "--:--", "team2_runner6": "FlamingLazer", "team2_time6": "--:--", "team3_runner6": "Saber", "team3_time6": "--:--", "team1_runner3": "Garrison", "team1_time3": "--:--", "team2_runner3": "GildetPhantom", "team2_time3": "--:--", "team3_runner3": "Jablaky", "team3_time3": "--:--", "team1_runner5": "Core", "team1_time5": "--:--", "team2_runner5": "FlamingLazer", "team2_time5": "--:--", "team3_runner5": "Saber", "team3_time5": "--:--"}
+{
+    "team1": {
+        "E1": {
+            "runner": "Anonymous",
+            "time": "--:--"
+        },
+        "E2": {
+            "runner": "Garrison",
+            "time": "--:--"
+        },
+        "E4": {
+            "runner": "Core",
+            "time": "--:--"
+        },
+        "E6": {
+            "runner": "Anonymous",
+            "time": "--:--"
+        },
+        "E3": {
+            "runner": "Garrison",
+            "time": "--:--"
+        },
+        "E5": {
+            "runner": "Core",
+            "time": "--:--"
+        }
+    },
+    "team2": {
+        "E1": {
+            "runner": "Charzight",
+            "time": "--:--"
+        },
+        "E2": {
+            "runner": "GildetPhantom",
+            "time": "--:--"
+        },
+        "E4": {
+            "runner": "Charzight",
+            "time": "--:--"
+        },
+        "E6": {
+            "runner": "FlamingLazer",
+            "time": "--:--"
+        },
+        "E3": {
+            "runner": "GildetPhantom",
+            "time": "--:--"
+        },
+        "E5": {
+            "runner": "FlamingLazer",
+            "time": "--:--"
+        }
+    },
+    "team3": {
+        "E1": {
+            "runner": "Jablaky",
+            "time": "--:--"
+        },
+        "E2": {
+            "runner": "Saber",
+            "time": "--:--"
+        },
+        "E4": {
+            "runner": "Jablaky",
+            "time": "--:--"
+        },
+        "E6": {
+            "runner": "Saber",
+            "time": "--:--"
+        },
+        "E3": {
+            "runner": "Jablaky",
+            "time": "--:--"
+        },
+        "E5": {
+            "runner": "Saber",
+            "time": "--:--"
+        }
+    }
+}
