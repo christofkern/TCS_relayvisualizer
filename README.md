@@ -31,9 +31,9 @@ Follow these steps to get the application running:
 ## Application Endpoints
 
 - `\`: Main page that loads and displays data from \`data.json\`.
-- `/command`: Handles data updates via POST and displays current data via GET.
-- `/data`: Provides current data in JSON format via GET.
-- `/data-last-modified`: Returns the timestamp of the last data modification via GET.
+- `\command`: Handles data updates via POST and displays current data via GET.
+- `\data`: Provides current data in JSON format via GET.
+- `\data-last-modified`: Returns the timestamp of the last data modification via GET.
 
 ## Usage
 
