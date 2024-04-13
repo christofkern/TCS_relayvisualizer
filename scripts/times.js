@@ -17,11 +17,11 @@ fetch('/data')
     }
 
     const table = document.getElementById('episodeTable');
-    const episodes = ["E1", "E2", "E4", "E6", "E3", "E5"];
-    let lastEndTimes = { team1: "", team2: "", team3: "" };
+    const episodes = ["E1", "E2", "E4", "E6", "E3", "E5"];    
 
     function updateRunners(){
         table.innerHTML = ""
+        let lastEndTimes = { team1: "", team2: "", team3: "" };
 
         episodes.forEach(ep => {
             const row = table.insertRow();
