@@ -10,12 +10,16 @@ function startTimer(startTime = null) {
     clearInterval(timerInterval); 
     let diff;
 
-    timerInterval = setInterval(() => {
+    function calcTimerDisplay(){
         diff = new Date(Date.now() - startTime);
         let hours = diff.getUTCHours().toString().padStart(2, '0');
         let minutes = diff.getMinutes().toString().padStart(2, '0');
         let seconds = diff.getSeconds().toString().padStart(2, '0');
         timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    calcTimerDisplay();
+    timerInterval = setInterval(() => {
+        calcTimerDisplay();
     }, 1000);
 }
 
