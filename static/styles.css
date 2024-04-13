@@ -25,6 +25,9 @@ table {
     border-collapse: separate;
     border-spacing: 15px 0;
     border: none;
+    table-layout: fixed;
+    width: 1000px;
+
 }
 th, td {
     border: none;
@@ -112,6 +115,19 @@ table td {
     text-align: left;
 }
 
+
+.cell-end {
+    font-family: 'IBMplexMono-Medium', sans-serif; 
+    font-size: 20px;
+    color: white; 
+    text-align: center; 
+    padding-top: 25px;
+    padding-left: 10px; 
+    padding-right: 10px;
+    overflow: visible;
+    white-space: nowrap;
+    width: 20px;
+}
 
 #timer {
     font-size: 2rem;

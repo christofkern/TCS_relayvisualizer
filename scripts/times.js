@@ -6,14 +6,23 @@ fetch('/data')
 
     clearInterval(timesInterval); 
 
-    function formatDuration(start, end, offset) {        
-        if (! (end instanceof Date) | isNaN(end) ) return "--:--";                
+    function formatDuration(start, end, offset, showHours = false) {
+        if (!(end instanceof Date) || isNaN(end.getTime())) {
+            return "--:--";
+        }
+    
         const startDate = new Date(offset || start);
-        //console.log(end)
         const diff = end - startDate;
-        const minutes = Math.floor(diff / 60000);
-        const seconds = ((diff % 60000) / 1000).toFixed(0);
-        return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + "";
+        
+        const hours = Math.floor(diff / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        if (showHours) {
+            return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        } else {
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
     }
 
     const table = document.getElementById('episodeTable');
@@ -22,6 +31,7 @@ fetch('/data')
     function updateRunners(){
         table.innerHTML = ""
         let lastEndTimes = { team1: "", team2: "", team3: "" };
+        let anyRunnerActive = { team1: false, team2: false, team3: false };
 
         episodes.forEach(ep => {
             const row = table.insertRow();
@@ -44,6 +54,7 @@ fetch('/data')
                 let activeRunner = false;
                 if (data.end_time == "" && (lastEndTimes[team] !== "" || ep == "E1") ){
                     activeRunner = true;
+                    anyRunnerActive[team] = true;
                     cellLeft.classList.add('active');
                 }
                  
@@ -77,9 +88,45 @@ fetch('/data')
                     if (startTime === "") {
                         cellLeft.textContent = "--:--";
                     }
+
+                    
+
                 } 
             });    
         });
+        
+        //if all runner are finished, show the total time
+        if (!anyRunnerActive.team1 || !anyRunnerActive.team2 || !anyRunnerActive.team3 ){
+            const row = table.insertRow();
+           
+            row.insertCell();
+            if (!anyRunnerActive.team1){   
+                const cell = row.insertCell();                
+                cell.textContent =  formatDuration(jsonData.start_time, new Date(jsonData["team1"]["E5"]["end_time"]), "", true);
+                cell.classList.add('cell-end');
+                row.insertCell();
+            }else{
+                row.insertCell();
+                row.insertCell();
+            }
+            
+            if (!anyRunnerActive.team2){
+                row.insertCell(formatDuration(jsonData.start_time, jsonData["team2"]["E5"]));
+                row.insertCell();
+            }else{
+                row.insertCell();
+                row.insertCell();
+            }
+
+            if (!anyRunnerActive.team3){
+                row.insertCell(formatDuration(jsonData.start_time, jsonData["team3"]["E5"]));
+                row.insertCell();
+            }else{
+                row.insertCell();
+                row.insertCell();
+            }
+        }
+        
     }
 
     updateRunners();
