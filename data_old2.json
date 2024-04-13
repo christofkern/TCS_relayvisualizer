@@ -1,81 +1,80 @@
 {
-    "start_time": "2024-12-30T23:59:59.000Z",
     "team1": {
         "E1": {
             "runner": "Anonymous",
-            "end_time": "2024-12-31T00:15:50.000Z"
+            "time": "12:34"
         },
         "E2": {
             "runner": "Garrison",
-            "end_time": ""
+            "time": "20:41"
         },
         "E4": {
             "runner": "Core",
-            "end_time": ""
+            "time": "--:--"
         },
         "E6": {
             "runner": "Anonymous",
-            "end_time": ""
+            "time": "--:--"
         },
         "E3": {
             "runner": "Garrison",
-            "end_time": ""
+            "time": "--:--"
         },
         "E5": {
             "runner": "Core",
-            "end_time": ""
+            "time": "--:--"
         }
     },
     "team2": {
         "E1": {
             "runner": "Charzight",
-            "end_time": ""
+            "time": "--:--"
         },
         "E2": {
             "runner": "GildetPhantom",
-            "end_time": ""
+            "time": "--:--"
         },
         "E4": {
             "runner": "Charzight",
-            "end_time": ""
+            "time": "--:--"
         },
         "E6": {
             "runner": "FlamingLazer",
-            "end_time": ""
+            "time": "--:--"
         },
         "E3": {
             "runner": "GildetPhantom",
-            "end_time": ""
+            "time": "--:--"
         },
         "E5": {
             "runner": "FlamingLazer",
-            "end_time": ""
+            "time": "--:--"
         }
     },
     "team3": {
         "E1": {
             "runner": "Jablaky",
-            "end_time": ""
+            "time": "--:--"
         },
         "E2": {
             "runner": "Saber",
-            "end_time": ""
+            "time": "--:--"
         },
         "E4": {
             "runner": "Jablaky",
-            "end_time": ""
+            "time": "--:--"
         },
         "E6": {
             "runner": "Saber",
-            "end_time": ""
+            "time": "--:--"
         },
         "E3": {
             "runner": "Jablaky",
-            "end_time": ""
+            "time": "--:--"
         },
         "E5": {
             "runner": "Saber",
-            "end_time": ""
+            "time": "--:--"
         }
     }
 }

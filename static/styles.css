@@ -1,61 +1,120 @@
-body {
-    background-color: #000;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
+@font-face{
+    font-family:'IBMplexSans-Bold';
+    src: url('IBMplexSans-Bold.ttf') format('truetype');
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+@font-face{
+    font-family:'IBMplexSans-SemiBold';
+    src: url('IBMplexSans-SemiBold.ttf') format('truetype');
 }
 
-.team {
-    background: #111;
-    padding: 10px;
-    width: 30%;
+
+@font-face{
+    font-family:'IBMplexSans-Medium';
+    src: url('IBMplexSans-Medium.ttf') format('truetype');
 }
 
-.team h2 {
-    background: #222;
-    margin: 0;
-    padding: 10px;
-    text-align: center;
+@font-face{
+    font-family:'IBMplexMono-Medium';
+    src: url('IBMplexMono-Medium.ttf') format('truetype');
 }
 
-.episode {
-    border-top: 2px dashed #444;
-    padding: 10px;
-    position: relative;
+body {background-color: black;}
+
+table {
+    border-collapse: separate;
+    border-spacing: 15px 0;
+    border: none;
+}
+th, td {
+    border: none;
+    color: white
 }
 
-.episode-number {
+table th {
+    font-family: 'IBMplexSans-SemiBold';
+    font-size: 28px;
+    letter-spacing: -1px; 
+}
+
+table td:first-child {
+    font-family: 'IBMplexSans-Bold', sans-serif;
+    font-size: 25px;
+    padding-right: 35px;
+}
+
+table td {
+    font-family: Arial, sans-serif; /* Example of a default font */
+}
+
+.cell-left {
+    font-family: 'IBMplexMono-Medium', sans-serif; 
     font-size: 20px;
+    color: black; 
+    background-color: white;
+    text-align: center; 
+    padding-left: 10px; 
+    padding-right: 10px;
+    
 }
 
-.time {
-    background-color: #004400;
-    color: #00FF00;
-    padding: 5px;
-    border-radius: 5px;
+.cell-left.done{
+    background-color: #adf7b6;
 }
 
-.runner {
-    float: right;
-    background-color: #4444FF;
-    color: #FFFFFF;
-    padding: 5px;
-    border-radius: 5px;
+.cell-left.active{
+    background-color: #79addc;
 }
 
-.pending .time {
-    background-color: #222222;
+.separator, .separatorDone, .seperatorActive {
+    position: relative; 
+    height: 25px; 
 }
 
-.completed {
-    color: #00FF00;
+.separator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; 
+    transform: translate(-50%, 0); 
+    height: 100%; 
+    width: 6px; 
+    background-color: white;
 }
 
-.pending {
-    color: #555555;
+.separatorDone::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; 
+    transform: translate(-50%, 0); 
+    height: 100%; 
+    width: 6px;
+    background-color: #adf7b6;
+}
+
+.separatorActive::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%; 
+    transform: translate(-50%, 0); 
+    height: 100%; 
+    width: 6px;
+    background-color: #79addc;
+}
+
+.cell-right {
+    width: 160px;
+    font-family: 'IBMplexSans-SemiBold', sans-serif;
+    font-size: 16px;
+    color: white; 
+    text-align: left;
+}
+
+
+#timer {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: white;
 }

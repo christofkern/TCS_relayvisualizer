@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import json
 import os
 
@@ -46,6 +46,9 @@ def data_last_modified():
     except OSError:
         return jsonify({'lastModified': None})
 
+@app.route('/scripts/<path:filename>')
+def scripts(filename):
+    return send_from_directory('scripts', filename)
 
 
 def save_data(form_data):

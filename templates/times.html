@@ -8,15 +8,15 @@
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+
+
+document.addEventListener('DOMContentLoaded', function() {
         var lastKnownModification = null;
     
         function fetchDataModificationTime() {
             fetch('{{ url_for('data_last_modified') }}')
                 .then(response => response.json())
-                .then(data => {
-                    console.log("Fetched Last Modified Time:", data.lastModified);
-                    console.log("Last Known Modification Time:",lastKnownModification);
+                .then(data => {                    
                     if (lastKnownModification === null) {
                         lastKnownModification = data.lastModified;
                         
@@ -29,27 +29,32 @@
                 });
         }
     
-        // Check every 10 seconds
+        //Check every 10 seconds
         setInterval(fetchDataModificationTime, 10000);
-    });
-    </script>
     
+});
+
+</script>
+
 </head>
 <body>
-    <div class="container">  
-        {% for team, episodes in data.items() %}
-        <div class="team">
-            <h2>{{ team.upper() }}</h2>
-            {% for episode in ['E1', 'E2', 'E4', 'E6', 'E3', 'E5'] %}
-            <div class="episode {{ 'completed' if episodes[episode]['time'] != '--:--' else 'pending' }}">
-                <span class="episode-number">{{ episode }}</span>
-                <span class="time">{{ episodes[episode]['time'] }}</span>
-                <span class="runner">{{ episodes[episode]['runner'] }}</span>
-            </div>
-            {% endfor %}
-        </div>
-        {% endfor %}
-    </div>
-    <button onclick="window.open('{{ url_for('command') }}', '_blank')">Edit Data</button>
+<div id="timer">00:00:00</div>
+<button id="startButton">Start Timer</button>
+
+
+<table id="episodeTable">
+    <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+</table>
 </body>
 </html>
+
+<script src="../scripts/timer.js"></script>
+<script src="../scripts/times.js"></script>
