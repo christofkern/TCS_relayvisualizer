@@ -7,7 +7,7 @@ fetch('/data')
     clearInterval(timesInterval); 
 
     function formatDuration(start, end, offset, showHours = false) {
-        if (!(end instanceof Date) || isNaN(end.getTime())) {
+        if (!(end instanceof Date) || isNaN(end.getTime()) || isNaN(new Date(start).getTime())) {
             return "--:--";
         }
     

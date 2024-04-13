@@ -4,6 +4,9 @@ import os
 
 app = Flask(__name__)
 
+global startingTime
+startingTime = ""
+
 @app.route('/')
 def index():
     try:
@@ -16,11 +19,13 @@ def index():
 
 @app.route('/command', methods=['GET', 'POST'])
 def command():
+    global startingTime
     if request.method == 'POST':
         data = request.form
         save_data(data)        
         with open('data.json', 'r') as f:
                 data = json.load(f)
+                startingTime = data["startTime"]
         return render_template('command.html', data=data)
     else:
         try:
@@ -52,22 +57,25 @@ def scripts(filename):
 
 
 def save_data(form_data):
+    global startingTime
     structured_data = {f'team{num}': {} for num in range(1, 4)} 
+    
+    
     #print(form_data)
     # Iterate over the form data
     for key in form_data:
-        #print (key)
+        print (key)
         key_parts = key.split('_')
         team_num, entry_type, ep_num = key_parts[0][4:], key_parts[1][:-1], key_parts[1][-1]
 
         if f'E{ep_num}' not in structured_data[f'team{team_num}']:
-            structured_data[f'team{team_num}'][f'E{ep_num}'] = {'runner': '', 'time': '--:--'}
+            structured_data[f'team{team_num}'][f'E{ep_num}'] = {'runner': '', 'end_time': ''}
 
         if entry_type == 'runner':
             structured_data[f'team{team_num}'][f'E{ep_num}']['runner'] = form_data[key]
-        elif entry_type == 'time':
-            structured_data[f'team{team_num}'][f'E{ep_num}']['time'] = form_data[key]
-
+        elif entry_type == 'end_time':
+            structured_data[f'team{team_num}'][f'E{ep_num}']['end_time'] = form_data[key]
+    structured_data["startTime"] = ""
     with open('data.json', 'w') as f:
         json.dump(structured_data, f, indent=4)
 

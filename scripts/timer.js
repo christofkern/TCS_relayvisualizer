@@ -1,5 +1,4 @@
 const timerDisplay = document.getElementById('timer');
-const startButton = document.getElementById('startButton');
 let timerInterval = null;
 
 function startTimer(startTime = null) {
@@ -10,12 +9,30 @@ function startTimer(startTime = null) {
     clearInterval(timerInterval); 
     let diff;
 
-    function calcTimerDisplay(){
-        diff = new Date(Date.now() - startTime);
-        let hours = diff.getUTCHours().toString().padStart(2, '0');
-        let minutes = diff.getMinutes().toString().padStart(2, '0');
-        let seconds = diff.getSeconds().toString().padStart(2, '0');
-        timerDisplay.textContent = `${hours}:${minutes}:${seconds}`;
+    function calcTimerDisplay() {
+        const diff = new Date(Date.now() - startTime);
+        const hours = diff.getUTCHours();
+        const minutes = diff.getMinutes();
+        const seconds = diff.getSeconds().toString().padStart(2, '0');
+    
+        // Prepare an array to accumulate time parts
+        let timeParts = [];
+    
+        // Only add hours if they are greater than 0
+        if (hours > 0) {
+            timeParts.push(hours.toString().padStart(2, '0'));
+        }
+    
+        // Add minutes if hours are present, or if minutes are greater than 0
+        if (hours > 0 || minutes > 0) {
+            timeParts.push(minutes.toString().padStart(2, '0'));
+        }
+    
+        // Seconds are always displayed
+        timeParts.push(seconds);
+    
+        // Join all the time parts with colons
+        timerDisplay.textContent = timeParts.join(':');
     }
     calcTimerDisplay();
     timerInterval = setInterval(() => {
@@ -29,8 +46,4 @@ fetch('/data')
 .then(jsonData => {
     // Initial start time setup, if the race is already on
     startTimer(new Date(jsonData.start_time));
-});
-
-startButton.addEventListener('click', () => {
-    startTimer(new Date());
 });

@@ -21,6 +21,15 @@
 
 body {background-color: black;}
 
+#timer{
+    font-family: 'IBMplexMono-Medium', sans-serif; 
+    color: white; 
+    text-align: center; 
+    padding-top: 20px;
+    padding-bottom: 50px;
+    letter-spacing: -1px; 
+}
+
 table {
     border-collapse: separate;
     border-spacing: 15px 0;

@@ -1,8 +1,11 @@
 {
-    "start_time": "2024-04-13T00:00:00.000Z",
     "team1": {
         "E1": {
             "runner": "Anonymous",
+            "end_time": ""
+        },
+        "Ed": {
+            "runner": "",
             "end_time": ""
         },
         "E2": {
@@ -31,6 +34,10 @@
             "runner": "Charzight",
             "end_time": ""
         },
+        "Ed": {
+            "runner": "",
+            "end_time": ""
+        },
         "E2": {
             "runner": "GildetPhantom",
             "end_time": ""
@@ -54,28 +61,33 @@
     },
     "team3": {
         "E1": {
-            "runner": "Jablaky",
+            "runner": "Saber",
+            "end_time": ""
+        },
+        "Ed": {
+            "runner": "",
             "end_time": ""
         },
         "E2": {
-            "runner": "Saber",
+            "runner": "Jablaky",
             "end_time": ""
         },
         "E4": {
-            "runner": "Jablaky",
+            "runner": "Saber",
             "end_time": ""
         },
         "E6": {
-            "runner": "Saber",
-            "end_time": ""
-        },
-        "E3": {
             "runner": "Jablaky",
             "end_time": ""
         },
-        "E5": {
+        "E3": {
             "runner": "Saber",
             "end_time": ""
+        },
+        "E5": {
+            "runner": "Jablaky",
+            "end_time": ""
         }
-    }
+    },
+    "startTime": ""
 }

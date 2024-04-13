@@ -34,12 +34,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
+
+const startButton = document.getElementById('startButton');
+startButton.addEventListener('click', () => {
+    startTimer(new Date());
+});
 </script>
 
 </head>
 <body>
 <div id="timer">00:00:00</div>
-<!-- <button id="startButton">Start Timer</button> -->
+
 
 
 <table id="episodeTable">
