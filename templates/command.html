@@ -1,15 +1,78 @@
-<!-- command.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Episode Timing Table</title>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Episode Timing Table</title>
+
+
 
 <script>
+
+function getUTCDateTime() {
+    const now = new Date();
+
+    const year = now.getUTCFullYear();
+    const month = (now.getUTCMonth() + 1).toString().padStart(2, '0'); // getUTCMonth is zero-indexed
+    const day = now.getUTCDate().toString().padStart(2, '0');
+    const hours = now.getUTCHours().toString().padStart(2, '0');
+    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+
+    // Return the formatted UTC datetime string
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+}
+
+
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('yourFormId');  // Make sure your form has an ID
+       
+        window.handleStartButton = function() {  
+            const datetimeLocal = getUTCDateTime();
+
+            // Set the value of the startTime input
+            const startTimeInput = document.querySelector('input[name="startTime"]');
+            startTimeInput.value = datetimeLocal;
+        };
+
+        window.handleSplit1 = function() {
+            const endTimeInputs = document.querySelectorAll('input[name^="team1_endtime"]');
+
+            // Find the first input that is empty and set it with the current UTC time
+            for (let input of endTimeInputs) {
+                if (!input.value) { 
+                    input.value = getUTCDateTime();                     
+                    break; 
+                }
+            }
+        };
+
+        window.handleSplit2 = function() {
+            const endTimeInputs = document.querySelectorAll('input[name^="team2_endtime"]');
+
+            // Find the first input that is empty and set it with the current UTC time
+            for (let input of endTimeInputs) {
+                if (!input.value) { 
+                    input.value = getUTCDateTime();                     
+                    break; 
+                }
+            }
+        };
+
+        window.handleSplit3 = function() {
+            const endTimeInputs = document.querySelectorAll('input[name^="team3_endtime"]');
+
+            // Find the first input that is empty and set it with the current UTC time
+            for (let input of endTimeInputs) {
+                if (!input.value) { 
+                    input.value = getUTCDateTime();                     
+                    break; 
+                }
+            }
+        };
+       
+       
+       
         form.onsubmit = function(event) {
             event.preventDefault();  // Prevent the default form submission
             fetch(form.action, {
@@ -30,12 +93,26 @@
         };
     });
     </script>
-    
 
+
+
+    
+</head>
 <body>
     <h1>Enter Run Data</h1>
+
+    
     <form action="{{ url_for('command') }}" method="post">
-        <table>
+
+
+        Start Time: <input type="datetime-local" name="startTime" step="1"
+        value="{{ data.get('start_time', '').replace('Z', '').split('.')[0] }}">
+
+        <button id="startButton" onclick="handleStartButton()">Start Timer</button>
+        <br> 
+        <br>
+        <br>
+        <table id="commandTable" style="text-align: center;"> 
             <tr>
                 <th>Episode</th>
                 <th>Team 1</th>
@@ -45,19 +122,33 @@
             {% for i in [1, 2, 4, 6, 3, 5] %}
             <tr>
                 <td>E{{ i }}</td>
-                {% for team_num in range(1, 4) %}
+                {% for team_num in range(1, 4) %}                
                 <td>
                     Runner: <input type="text" name="team{{ team_num }}_runner{{ i }}"
-                           value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('runner', '') }}" required>
-                    Time: <input type="text" name="team{{ team_num }}_time{{ i }}"
-                           pattern="\d{2}:\d{2}|--:--" placeholder="MM:SS"
-                           value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('time', '--:--') }}" required>
+                        value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('runner', '') }}" required>
+                    End Time: <input type="datetime-local" step="1" name="team{{ team_num }}_endtime{{ i }}"
+                        value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('end_time', '').replace('Z', '').split('.')[0] }}">
                 </td>
                 {% endfor %}
             </tr>
             {% endfor %}
+            <tr>
+                <td>
+                    <input type="submit" value="Save Data">
+                </td>
+                <td>
+                   <button id="split1" onclick="handleSplit1()">Split Team 1</button> 
+                </td>
+                <td>
+                    <button id="split2" onclick="handleSplit2()">Split Team 2</button>
+                </td>
+                <td>
+                   <button id="split3" onclick="handleSplit3()">Split Team 3</button> 
+                </td>
+                
+            </tr>
         </table>
-        <input type="submit" value="Save Data">
+        
     </form>
 </body>
 </html>

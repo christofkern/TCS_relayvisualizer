@@ -111,7 +111,9 @@ fetch('/data')
             }
             
             if (!anyRunnerActive.team2){
-                row.insertCell(formatDuration(jsonData.start_time, jsonData["team2"]["E5"]));
+                const cell = row.insertCell();                
+                cell.textContent =  formatDuration(jsonData.start_time, new Date(jsonData["team2"]["E5"]["end_time"]), "", true);
+                cell.classList.add('cell-end');
                 row.insertCell();
             }else{
                 row.insertCell();
@@ -119,7 +121,9 @@ fetch('/data')
             }
 
             if (!anyRunnerActive.team3){
-                row.insertCell(formatDuration(jsonData.start_time, jsonData["team3"]["E5"]));
+                const cell = row.insertCell();                
+                cell.textContent =  formatDuration(jsonData.start_time, new Date(jsonData["team3"]["E5"]["end_time"]), "", true);
+                cell.classList.add('cell-end');
                 row.insertCell();
             }else{
                 row.insertCell();

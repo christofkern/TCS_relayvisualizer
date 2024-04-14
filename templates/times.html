@@ -29,21 +29,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
         }
     
-        //Check every 10 seconds
-        setInterval(fetchDataModificationTime, 10000);
+        //Check every second
+        setInterval(fetchDataModificationTime, 1000);
     
 });
 
-
-const startButton = document.getElementById('startButton');
-startButton.addEventListener('click', () => {
-    startTimer(new Date());
-});
 </script>
 
 </head>
-<body>
-<div id="timer">00:00:00</div>
+<body id="times">
+<div id="timer"></div>  
 
 
 

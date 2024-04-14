@@ -4,10 +4,6 @@
             "runner": "Anonymous",
             "end_time": ""
         },
-        "Ed": {
-            "runner": "",
-            "end_time": ""
-        },
         "E2": {
             "runner": "Garrison",
             "end_time": ""
@@ -32,10 +28,6 @@
     "team2": {
         "E1": {
             "runner": "Charzight",
-            "end_time": ""
-        },
-        "Ed": {
-            "runner": "",
             "end_time": ""
         },
         "E2": {
@@ -64,10 +56,6 @@
             "runner": "Saber",
             "end_time": ""
         },
-        "Ed": {
-            "runner": "",
-            "end_time": ""
-        },
         "E2": {
             "runner": "Jablaky",
             "end_time": ""
@@ -89,5 +77,5 @@
             "end_time": ""
         }
     },
-    "startTime": ""
+    "start_time": "2024-04-14T00:50:02.000Z"
 }

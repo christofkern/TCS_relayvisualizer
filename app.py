@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import json
 import os
+from dateutil import parser
+
 
 app = Flask(__name__)
 
-global startingTime
+
 startingTime = ""
 
 @app.route('/')
@@ -19,13 +21,11 @@ def index():
 
 @app.route('/command', methods=['GET', 'POST'])
 def command():
-    global startingTime
     if request.method == 'POST':
         data = request.form
         save_data(data)        
         with open('data.json', 'r') as f:
                 data = json.load(f)
-                startingTime = data["startTime"]
         return render_template('command.html', data=data)
     else:
         try:
@@ -55,27 +55,38 @@ def data_last_modified():
 def scripts(filename):
     return send_from_directory('scripts', filename)
 
+def format_datetime(datetime_str):
+    if not datetime_str:
+        return ""  # or return a default value, or handle the error as needed
+    print(datetime_str)
+    dt = parser.parse(str(datetime_str))
+    formatted_dt = dt.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'  
+
+    return formatted_dt
 
 def save_data(form_data):
-    global startingTime
     structured_data = {f'team{num}': {} for num in range(1, 4)} 
     
     
     #print(form_data)
     # Iterate over the form data
     for key in form_data:
-        print (key)
+        #print (key)
+        if (key == "startTime"):
+            structured_data["start_time"] = format_datetime(form_data[key])
+            continue
+
         key_parts = key.split('_')
         team_num, entry_type, ep_num = key_parts[0][4:], key_parts[1][:-1], key_parts[1][-1]
-
-        if f'E{ep_num}' not in structured_data[f'team{team_num}']:
-            structured_data[f'team{team_num}'][f'E{ep_num}'] = {'runner': '', 'end_time': ''}
-
+        
+        if f'E{ep_num}' not in structured_data[f'team{team_num}']:            
+            structured_data[f'team{team_num}'][f'E{ep_num}'] = {'runner': '', 'end_time': ''}        
         if entry_type == 'runner':
             structured_data[f'team{team_num}'][f'E{ep_num}']['runner'] = form_data[key]
-        elif entry_type == 'end_time':
-            structured_data[f'team{team_num}'][f'E{ep_num}']['end_time'] = form_data[key]
-    structured_data["startTime"] = ""
+        elif entry_type == 'endtime':                    
+            structured_data[f'team{team_num}'][f'E{ep_num}']['end_time'] = format_datetime(form_data[key])
+
+    
     with open('data.json', 'w') as f:
         json.dump(structured_data, f, indent=4)
 
