@@ -14,7 +14,7 @@ This web application, built using Flask, is specifically designed to track indiv
 Ensure you have Python and Flask installed to run this application. You can install Flask using the following command:
 
 ```
-pip install Flask
+pip install -r requirements.txt
 ```
 
 ## Running the Application
