@@ -1,22 +1,22 @@
 @font-face{
     font-family:'IBMplexSans-Bold';
-    src: url('IBMplexSans-Bold.ttf') format('truetype');
+    src: url('fonts/IBMplexSans-Bold.ttf') format('truetype');
 }
 
 @font-face{
     font-family:'IBMplexSans-SemiBold';
-    src: url('IBMplexSans-SemiBold.ttf') format('truetype');
+    src: url('fonts/IBMplexSans-SemiBold.ttf') format('truetype');
 }
 
 
 @font-face{
     font-family:'IBMplexSans-Medium';
-    src: url('IBMplexSans-Medium.ttf') format('truetype');
+    src: url('fonts/IBMplexSans-Medium.ttf') format('truetype');
 }
 
 @font-face{
     font-family:'IBMplexMono-Medium';
-    src: url('IBMplexMono-Medium.ttf') format('truetype');
+    src: url('fonts/IBMplexMono-Medium.ttf') format('truetype');
 }
 
 body {background-color: black;}
