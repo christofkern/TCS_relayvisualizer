@@ -59,6 +59,7 @@ def scripts(filename):
 def custom_font_route(filename):
     return send_from_directory('static/fonts', filename, mimetype='font/ttf')
 
+
 def format_datetime(datetime_str):
     if not datetime_str:
         return ""  # or return a default value, or handle the error as needed
