@@ -55,9 +55,9 @@ def data_last_modified():
 def scripts(filename):
     return send_from_directory('scripts', filename)
 
-@app.route('/static/<path:filename>')
-def static(filename):
-    return send_from_directory('static', filename)
+@app.route('/fonts/<path:filename>')
+def custom_font_route(filename):
+    return send_from_directory('static', filename, mimetype='font/ttf')
 
 def format_datetime(datetime_str):
     if not datetime_str:
