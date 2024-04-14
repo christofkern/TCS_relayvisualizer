@@ -55,14 +55,14 @@ def data_last_modified():
 def scripts(filename):
     return send_from_directory('scripts', filename)
 
-@app.route('/static/fonts/<path:filename>')
+@app.route('/fonts/<path:filename>')
 def custom_font_route(filename):
     return send_from_directory('static/fonts', filename, mimetype='font/ttf')
 
 def format_datetime(datetime_str):
     if not datetime_str:
         return ""  # or return a default value, or handle the error as needed
-    print(datetime_str)
+    #print(datetime_str)
     dt = parser.parse(str(datetime_str))
     formatted_dt = dt.strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'  
 
