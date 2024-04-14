@@ -13,7 +13,7 @@ function getUTCDateTime() {
     const now = new Date();
 
     const year = now.getUTCFullYear();
-    const month = (now.getUTCMonth() + 1).toString().padStart(2, '0'); // getUTCMonth is zero-indexed
+    const month = (now.getUTCMonth() + 1).toString().padStart(2, '0'); 
     const day = now.getUTCDate().toString().padStart(2, '0');
     const hours = now.getUTCHours().toString().padStart(2, '0');
     const minutes = now.getUTCMinutes().toString().padStart(2, '0');
@@ -23,74 +23,89 @@ function getUTCDateTime() {
     return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 }
 
+async function fetchUTCTime() {
+    try {
+        const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
+        const data = await response.json();
+        const utcDateTime = data.datetime; // This returns the datetime in ISO 8601 format
+
+        // Extract the date and time in the desired format
+        const year = utcDateTime.slice(0, 4);
+        const month = utcDateTime.slice(5, 7);
+        const day = utcDateTime.slice(8, 10);
+        const time = utcDateTime.slice(11, 19); // This includes hours, minutes, and seconds
+
+        // Return the formatted UTC datetime string
+        console.log(`${year}-${month}-${day}T${time}`)
+        return `${year}-${month}-${day}T${time}`;
+    } catch (error) {
+        console.error('Failed to fetch UTC time:', error);
+        return null; // Return null or handle the error appropriately
+    }
+}
+
 
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('yourFormId');  // Make sure your form has an ID
-       
-        window.handleStartButton = function() {  
-            const datetimeLocal = getUTCDateTime();
+              
+        const form =  document.getElementById('form');
 
-            // Set the value of the startTime input
-            const startTimeInput = document.querySelector('input[name="startTime"]');
-            startTimeInput.value = datetimeLocal;
+        window.handleStartButton = function() {  
+            event.preventDefault();
+            fetchUTCTime().then(utcTime => {
+                const startTimeInput = document.querySelector('input[name="startTime"]');
+                startTimeInput.value = utcTime;
+                form.submit();
+            });           
         };
 
         window.handleSplit1 = function() {
+            event.preventDefault();
             const endTimeInputs = document.querySelectorAll('input[name^="team1_endtime"]');
 
             // Find the first input that is empty and set it with the current UTC time
             for (let input of endTimeInputs) {
-                if (!input.value) { 
-                    input.value = getUTCDateTime();                     
+                if (!input.value) {                     
+                    fetchUTCTime().then(utcTime => {                        
+                        input.value = getUTCDateTime(utcTime);
+                        form.submit();
+                    });                       
                     break; 
                 }
             }
         };
 
         window.handleSplit2 = function() {
+            event.preventDefault();
             const endTimeInputs = document.querySelectorAll('input[name^="team2_endtime"]');
 
             // Find the first input that is empty and set it with the current UTC time
             for (let input of endTimeInputs) {
                 if (!input.value) { 
-                    input.value = getUTCDateTime();                     
+                    fetchUTCTime().then(utcTime => {                        
+                        input.value = getUTCDateTime(utcTime);
+                        form.submit();
+                    });                     
                     break; 
                 }
             }
         };
 
         window.handleSplit3 = function() {
+            event.preventDefault();
             const endTimeInputs = document.querySelectorAll('input[name^="team3_endtime"]');
 
             // Find the first input that is empty and set it with the current UTC time
             for (let input of endTimeInputs) {
                 if (!input.value) { 
-                    input.value = getUTCDateTime();                     
+                    fetchUTCTime().then(utcTime => {                        
+                        input.value = getUTCDateTime(utcTime);
+                    });                     
                     break; 
                 }
             }
-        };
+        };      
        
-       
-       
-        form.onsubmit = function(event) {
-            event.preventDefault();  // Prevent the default form submission
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: {
-                    'Accept': 'application/json',
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                if (data.close) {
-                    window.close();  // This will close the tab if the server responded with the close signal
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        };
+      
     });
     </script>
 
@@ -102,7 +117,7 @@ function getUTCDateTime() {
     <h1>Enter Run Data</h1>
 
     
-    <form action="{{ url_for('command') }}" method="post">
+    <form action="{{ url_for('command') }}" method="post" id="form">
 
 
         Start Time: <input type="datetime-local" name="startTime" step="1"
