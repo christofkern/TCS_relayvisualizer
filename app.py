@@ -55,6 +55,10 @@ def data_last_modified():
 def scripts(filename):
     return send_from_directory('scripts', filename)
 
+@app.route('/static/<path:filename>')
+def static(filename):
+    return send_from_directory('static', filename)
+
 def format_datetime(datetime_str):
     if not datetime_str:
         return ""  # or return a default value, or handle the error as needed
