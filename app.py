@@ -55,7 +55,7 @@ def data_last_modified():
 def scripts(filename):
     return send_from_directory('scripts', filename)
 
-@app.route('/fonts/<path:filename>')
+@app.route('/static/fonts/<path:filename>')
 def custom_font_route(filename):
     return send_from_directory('static/fonts', filename, mimetype='font/ttf')
 
