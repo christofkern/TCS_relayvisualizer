@@ -8,11 +8,13 @@ app = Flask(__name__)
 
 
 startingTime = ""
+config = 'dataFP.json'
+
 
 @app.route('/')
 def index():
     try:
-        with open('data.json', 'r') as f:
+        with open(config, 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
         data = {}
@@ -24,12 +26,12 @@ def command():
     if request.method == 'POST':
         data = request.form
         save_data(data)        
-        with open('data.json', 'r') as f:
-                data = json.load(f)
+        with open(config, 'r') as f:
+            data = json.load(f)
         return render_template('command.html', data=data)
     else:
         try:
-            with open('data.json', 'r') as f:
+            with open(config, 'r') as f:
                 data = json.load(f)
         except FileNotFoundError:
             data = {}  # If the file does not exist, create an empty dictionary
@@ -38,7 +40,7 @@ def command():
 
 @app.route('/data', methods=['GET'])
 def get_data():
-    with open('data.json', 'r') as f:
+    with open(config, 'r') as f:
         data = json.load(f)
     return jsonify(data)
 
@@ -46,7 +48,7 @@ def get_data():
 @app.route('/data-last-modified', methods=['GET'])
 def data_last_modified():
     try:
-        modification_time = os.path.getmtime('data.json')
+        modification_time = os.path.getmtime(config)
         return jsonify({'lastModified': modification_time})
     except OSError:
         return jsonify({'lastModified': None})
@@ -70,8 +72,7 @@ def format_datetime(datetime_str):
     return formatted_dt
 
 def save_data(form_data):
-    structured_data = {f'team{num}': {} for num in range(1, 4)} 
-    
+    structured_data = {}
     
     #print(form_data)
     # Iterate over the form data
@@ -80,19 +81,23 @@ def save_data(form_data):
         if (key == "startTime"):
             structured_data["start_time"] = format_datetime(form_data[key])
             continue
-
         key_parts = key.split('_')
-        team_num, entry_type, ep_num = key_parts[0][4:], key_parts[1][:-1], key_parts[1][-1]
+        team, ep_num, entry_type = key_parts[0], key_parts[1], key_parts[2]
+        print(team, ep_num, entry_type)
         
-        if f'E{ep_num}' not in structured_data[f'team{team_num}']:            
-            structured_data[f'team{team_num}'][f'E{ep_num}'] = {'runner': '', 'end_time': ''}        
+        if team not in structured_data:
+            structured_data[team] = {}
+
+        if ep_num not in structured_data[team]:           
+            structured_data[team][ep_num] = {'runner': '', 'end_time': ''}      
+
         if entry_type == 'runner':
-            structured_data[f'team{team_num}'][f'E{ep_num}']['runner'] = form_data[key]
+            structured_data[team][ep_num]['runner'] = form_data[key]
         elif entry_type == 'endtime':                    
-            structured_data[f'team{team_num}'][f'E{ep_num}']['end_time'] = format_datetime(form_data[key])
+            structured_data[team][ep_num]['end_time'] = format_datetime(form_data[key])
 
     
-    with open('data.json', 'w') as f:
+    with open(config, 'w') as f:
         json.dump(structured_data, f, indent=4)
 
 if __name__ == '__main__':

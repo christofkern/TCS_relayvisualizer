@@ -1,0 +1,55 @@
+{
+    "Team 1": {
+        "E1": {
+            "runner": "Anonymous",
+            "end_time": ""
+        },
+        "E2": {
+            "runner": "Garrison",
+            "end_time": ""
+        },
+        "E4": {
+            "runner": "Core",
+            "end_time": ""
+        },
+        "E6": {
+            "runner": "Anonymous",
+            "end_time": ""
+        },
+        "E3": {
+            "runner": "Garrison",
+            "end_time": ""
+        },
+        "E5": {
+            "runner": "Core",
+            "end_time": ""
+        }
+    },
+    "Team 2": {
+        "E1": {
+            "runner": "Charzight",
+            "end_time": ""
+        },
+        "E2": {
+            "runner": "GildetPhantom",
+            "end_time": ""
+        },
+        "E4": {
+            "runner": "Charzight",
+            "end_time": ""
+        },
+        "E6": {
+            "runner": "FlamingLazer",
+            "end_time": ""
+        },
+        "E3": {
+            "runner": "GildetPhantom",
+            "end_time": ""
+        },
+        "E5": {
+            "runner": "FlamingLazer",
+            "end_time": ""
+        }
+    },
+    "start_time": ""
+}

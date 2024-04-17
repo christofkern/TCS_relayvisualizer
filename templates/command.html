@@ -9,20 +9,6 @@
 
 <script>
 
-function getUTCDateTime() {
-    const now = new Date();
-
-    const year = now.getUTCFullYear();
-    const month = (now.getUTCMonth() + 1).toString().padStart(2, '0'); 
-    const day = now.getUTCDate().toString().padStart(2, '0');
-    const hours = now.getUTCHours().toString().padStart(2, '0');
-    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
-    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
-
-    // Return the formatted UTC datetime string
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
-}
-
 async function fetchUTCTime() {
     try {
         const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
@@ -45,6 +31,79 @@ async function fetchUTCTime() {
 }
 
 
+function loadTableFromJSON(data) {
+    const commandTable = document.getElementById('commandTable');
+    const teams = Object.keys(data);
+
+    // Clear existing table rows
+    commandTable.innerHTML = '';
+
+    // Get the episode order from the JSON data
+    const episodeOrder = Object.keys(data[teams[0]]);
+    //remove start_time from headers
+    delete teams[teams.indexOf("start_time")]
+    // Create table header
+    const headerRow = document.createElement('tr');
+    const headers = ['Episode', ...teams];
+    
+    headers.forEach((headerText, index) => {
+        const th = document.createElement('th');
+        th.textContent = headerText;
+        headerRow.appendChild(th);        
+    });
+    commandTable.appendChild(headerRow);
+
+    // Create table rows for each episode
+    episodeOrder.forEach(episode => {
+        const tr = document.createElement('tr');
+        const tdEpisode = document.createElement('td');
+        tdEpisode.textContent = episode;
+
+        // Create table cells for each team
+        teams.forEach(team => {
+            const td = document.createElement('td');
+            const inputRunner = document.createElement('input');
+            inputRunner.type = 'text';
+            inputRunner.name = `${team}_${episode}_runner`;
+            inputRunner.value = data[team][episode].runner;
+            const inputEndTime = document.createElement('input');
+            inputEndTime.type = 'datetime-local';
+            inputEndTime.name = `${team}_${episode}_endtime`;
+            inputEndTime.step = '1';
+            inputEndTime.value = data[team][episode].end_time ? data[team][episode].end_time.replace('Z', '').split('.')[0] : '';
+            td.appendChild(inputRunner);
+            td.appendChild(inputEndTime);
+            tr.appendChild(td);
+        });
+
+        tr.insertBefore(tdEpisode, tr.firstChild); // Insert episode cell at the beginning of the row
+        commandTable.appendChild(tr);  
+    });
+
+    const trButtons = document.createElement('tr');
+    
+    const tdSave = document.createElement('td');
+    const saveButton = document.createElement('input');
+    saveButton.type = 'submit';
+    saveButton.value = 'Save Data';
+    tdSave.appendChild(saveButton);
+    trButtons.appendChild(tdSave);
+
+    teams.forEach((team,index) => {
+        const tdSplit = document.createElement('td');
+        const splitButton = document.createElement('button');
+        splitButton.textContent = `Split ${team}`
+        splitButton.onclick = function(){
+            handleSplit(index);
+        }
+        tdSplit.appendChild(splitButton);
+        trButtons.appendChild(tdSplit);
+    });
+
+    commandTable.appendChild(trButtons);
+}
+
+
     document.addEventListener('DOMContentLoaded', function() {
               
         const form =  document.getElementById('form');
@@ -58,55 +117,41 @@ async function fetchUTCTime() {
             });           
         };
 
-        window.handleSplit1 = function() {
+        window.handleSplit = function(inded){
             event.preventDefault();
-            const endTimeInputs = document.querySelectorAll('input[name^="team1_endtime"]');
+            const endTimeInputs = document.querySelectorAll(`input[name^="team${index}_endtime"]`);
 
             // Find the first input that is empty and set it with the current UTC time
             for (let input of endTimeInputs) {
                 if (!input.value) {                     
                     fetchUTCTime().then(utcTime => {                        
-                        input.value = getUTCDateTime(utcTime);
+                        input.value = utcTime;
                         form.submit();
                     });                       
                     break; 
                 }
             }
-        };
-
-        window.handleSplit2 = function() {
-            event.preventDefault();
-            const endTimeInputs = document.querySelectorAll('input[name^="team2_endtime"]');
-
-            // Find the first input that is empty and set it with the current UTC time
-            for (let input of endTimeInputs) {
-                if (!input.value) { 
-                    fetchUTCTime().then(utcTime => {                        
-                        input.value = getUTCDateTime(utcTime);
-                        form.submit();
-                    });                     
-                    break; 
-                }
-            }
-        };
-
-        window.handleSplit3 = function() {
-            event.preventDefault();
-            const endTimeInputs = document.querySelectorAll('input[name^="team3_endtime"]');
-
-            // Find the first input that is empty and set it with the current UTC time
-            for (let input of endTimeInputs) {
-                if (!input.value) { 
-                    fetchUTCTime().then(utcTime => {                        
-                        input.value = getUTCDateTime(utcTime);
-                    });                     
-                    break; 
-                }
-            }
-        };      
-       
+        }   
       
     });
+
+
+  
+
+    // Load JSON data from file and dynamically generate table on page load
+    fetch('/data')
+        .then(response => response.json())
+        .then(jsonData => {
+            loadTableFromJSON(jsonData);
+        })
+        .catch(error => {
+            console.error('Error loading JSON data:', error);
+        });
+
+    // Other event handlers...
+    
+
+
     </script>
 
 
@@ -127,26 +172,7 @@ async function fetchUTCTime() {
         <br> 
         <br>
         <br>
-        <table id="commandTable" style="text-align: center;"> 
-            <tr>
-                <th>Episode</th>
-                <th>Team 1</th>
-                <th>Team 2</th>
-                <th>Team 3</th>               
-            </tr>
-            {% for i in [1, 2, 4, 6, 3, 5] %}
-            <tr>
-                <td>E{{ i }}</td>
-                {% for team_num in range(1, 4) %}                
-                <td>
-                    Runner: <input type="text" name="team{{ team_num }}_runner{{ i }}"
-                        value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('runner', '') }}" required>
-                    End Time: <input type="datetime-local" step="1" name="team{{ team_num }}_endtime{{ i }}"
-                        value="{{ data.get('team{}'.format(team_num), {}).get('E{}'.format(i), {}).get('end_time', '').replace('Z', '').split('.')[0] }}">
-                </td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
+        <table id="commandTable" style="text-align: center;">        
             <tr>
                 <td>
                     <input type="submit" value="Save Data">
@@ -161,7 +187,7 @@ async function fetchUTCTime() {
                    <button id="split3" onclick="handleSplit3()">Split Team 3</button> 
                 </td>
                 
-            </tr>
+            </tr>      
         </table>
         
     </form>
