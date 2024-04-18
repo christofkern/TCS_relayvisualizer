@@ -12,15 +12,30 @@
 
 document.addEventListener('DOMContentLoaded', function() {
             
-    const form =  document.getElementById('form');
+    const form = document.getElementById('form');
 
     window.handleStartButton = function() {  
         event.preventDefault();
+        console.log('Clearing all times');
         fetchFormattedUTCTime().then(utcTime => {
             const startTimeInput = document.querySelector('input[name="startTime"]');
             startTimeInput.value = utcTime;
             form.submit();
         });           
+    };
+
+    window.clearRunnerTimes = function() {  
+        event.preventDefault();
+        console.log('Clearing all times');
+        const endTimeInputs = document.querySelectorAll(`input`);
+        console.log(endTimeInputs);
+        for (let input of endTimeInputs) {            
+            if (input.name.includes('endtime')) {    
+                input.value = '';            
+            }          
+        }     
+          
+        form.submit();         
     };
 
     window.handleSplit = function(teamname){
@@ -71,23 +86,12 @@ document.addEventListener('DOMContentLoaded', function() {
         <br> 
         <br>
         <br>
-        <table id="commandTable" style="text-align: center;">        
-            <tr>
-                <td>
-                    <input type="submit" value="Save Data">
-                </td>
-                <td>
-                   <button id="split1" onclick="handleSplit1()">Split Team 1</button> 
-                </td>
-                <td>
-                    <button id="split2" onclick="handleSplit2()">Split Team 2</button>
-                </td>
-                <td>
-                   <button id="split3" onclick="handleSplit3()">Split Team 3</button> 
-                </td>
-                
-            </tr>      
+        <table id="commandTable" style="text-align: center;">  
         </table>
+        <br> 
+        <br>
+        <br>
+        <button id="clearTimes" onclick="clearRunnerTimes()">Clear All Times</button>
         
     </form>
 </body>
