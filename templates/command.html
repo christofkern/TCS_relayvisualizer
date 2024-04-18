@@ -9,27 +9,6 @@
 
 <script>
 
-async function fetchUTCTime() {
-    try {
-        const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
-        const data = await response.json();
-        const utcDateTime = data.datetime; // This returns the datetime in ISO 8601 format
-
-        // Extract the date and time in the desired format
-        const year = utcDateTime.slice(0, 4);
-        const month = utcDateTime.slice(5, 7);
-        const day = utcDateTime.slice(8, 10);
-        const time = utcDateTime.slice(11, 19); // This includes hours, minutes, and seconds
-
-        // Return the formatted UTC datetime string
-        console.log(`${year}-${month}-${day}T${time}`)
-        return `${year}-${month}-${day}T${time}`;
-    } catch (error) {
-        console.error('Failed to fetch UTC time:', error);
-        return null; // Return null or handle the error appropriately
-    }
-}
-
 
 function loadTableFromJSON(data) {
     const commandTable = document.getElementById('commandTable');
@@ -39,12 +18,15 @@ function loadTableFromJSON(data) {
     commandTable.innerHTML = '';
 
     // Get the episode order from the JSON data
-    const episodeOrder = Object.keys(data[teams[0]]);
-    //remove start_time from headers
-    delete teams[teams.indexOf("start_time")]
+    teams.splice(teams.indexOf("start_time"),1)
+    teams.splice(teams.indexOf("episode_order"),1)
+
+    const episodeOrder = data["episode_order"].split(',');
+
     // Create table header
     const headerRow = document.createElement('tr');
     const headers = ['Episode', ...teams];
+    console.log(episodeOrder)
     
     headers.forEach((headerText, index) => {
         const th = document.createElement('th');
@@ -89,12 +71,12 @@ function loadTableFromJSON(data) {
     tdSave.appendChild(saveButton);
     trButtons.appendChild(tdSave);
 
-    teams.forEach((team,index) => {
+    teams.forEach(team => {
         const tdSplit = document.createElement('td');
         const splitButton = document.createElement('button');
         splitButton.textContent = `Split ${team}`
         splitButton.onclick = function(){
-            handleSplit(index);
+            handleSplit(team);
         }
         tdSplit.appendChild(splitButton);
         trButtons.appendChild(tdSplit);
@@ -117,13 +99,12 @@ function loadTableFromJSON(data) {
             });           
         };
 
-        window.handleSplit = function(inded){
+        window.handleSplit = function(teamname){
             event.preventDefault();
-            const endTimeInputs = document.querySelectorAll(`input[name^="team${index}_endtime"]`);
-
+            const endTimeInputs = document.querySelectorAll(`input`);
             // Find the first input that is empty and set it with the current UTC time
             for (let input of endTimeInputs) {
-                if (!input.value) {                     
+                if (!input.value && input.name.includes(teamname)) {                     
                     fetchUTCTime().then(utcTime => {                        
                         input.value = utcTime;
                         form.submit();
@@ -193,3 +174,5 @@ function loadTableFromJSON(data) {
     </form>
 </body>
 </html>
+
+<script src="../scripts/fetchUTCTime.js"></script>

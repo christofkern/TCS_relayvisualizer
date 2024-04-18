@@ -1,5 +1,5 @@
 {
-    "team1": {
+    "Team 1": {
         "E1": {
             "runner": "Anonymous",
             "end_time": ""
@@ -25,7 +25,7 @@
             "end_time": ""
         }
     },
-    "team2": {
+    "Team 2": {
         "E1": {
             "runner": "Charzight",
             "end_time": ""
@@ -51,7 +51,7 @@
             "end_time": ""
         }
     },
-    "team3": {
+    "Team 3": {
         "E1": {
             "runner": "Saber",
             "end_time": ""
@@ -77,5 +77,6 @@
             "end_time": ""
         }
     },
-    "start_time": ""
+    "start_time": "",
+    "episode_order": "E1,E2,E4,E6,E3,E5"
 }

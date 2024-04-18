@@ -72,7 +72,11 @@ def format_datetime(datetime_str):
     return formatted_dt
 
 def save_data(form_data):
-    structured_data = {}
+    #keep episode structure
+    with open(config, 'r') as f:
+        data = json.load(f)
+
+    structured_data = {"episode_order": data["episode_order"]}
     
     #print(form_data)
     # Iterate over the form data
@@ -83,7 +87,7 @@ def save_data(form_data):
             continue
         key_parts = key.split('_')
         team, ep_num, entry_type = key_parts[0], key_parts[1], key_parts[2]
-        print(team, ep_num, entry_type)
+        #print(team, ep_num, entry_type)
         
         if team not in structured_data:
             structured_data[team] = {}

@@ -1,53 +1,54 @@
 {
-    "start_time": "2024-04-17T21:59:04.000Z",
+    "episode_order": "E6,E5,E4,E3,E2,E1",
+    "start_time": "2024-04-18T06:37:31.000Z",
     "Team 1": {
-        "E1": {
+        "E6": {
             "runner": "Anonymous",
-            "end_time": ""
-        },
-        "E2": {
-            "runner": "Garrison",
-            "end_time": ""
-        },
-        "E3": {
-            "runner": "Garrison",
-            "end_time": ""
-        },
-        "E4": {
-            "runner": "Core",
-            "end_time": ""
+            "end_time": "2024-04-18T06:37:14.000Z"
         },
         "E5": {
+            "runner": "Garrison",
+            "end_time": "2024-04-18T06:37:35.000Z"
+        },
+        "E4": {
+            "runner": "Garrison",
+            "end_time": "2024-04-18T06:37:38.000Z"
+        },
+        "E3": {
+            "runner": "Core",
+            "end_time": "2024-04-18T06:37:39.000Z"
+        },
+        "E2": {
             "runner": "Core",
             "end_time": ""
         },
-        "E6": {
+        "E1": {
             "runner": "Anonymous",
             "end_time": ""
         }
     },
     "Team 2": {
-        "E1": {
+        "E6": {
             "runner": "Charzight",
-            "end_time": ""
-        },
-        "E2": {
-            "runner": "GildetPhantom",
-            "end_time": ""
-        },
-        "E3": {
-            "runner": "GildetPhantom",
-            "end_time": ""
-        },
-        "E4": {
-            "runner": "Charzight",
-            "end_time": ""
+            "end_time": "2024-04-18T06:37:18.000Z"
         },
         "E5": {
-            "runner": "FlamingLazer",
-            "end_time": ""
+            "runner": "GildetPhantom",
+            "end_time": "2024-04-18T06:37:18.000Z"
         },
-        "E6": {
+        "E4": {
+            "runner": "GildetPhantom",
+            "end_time": "2024-04-18T06:37:19.000Z"
+        },
+        "E3": {
+            "runner": "Charzight",
+            "end_time": "2024-04-18T06:37:21.000Z"
+        },
+        "E2": {
+            "runner": "FlamingLazer",
+            "end_time": "2024-04-18T06:37:33.000Z"
+        },
+        "E1": {
             "runner": "FlamingLazer",
             "end_time": ""
         }
