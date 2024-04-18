@@ -1,55 +1,55 @@
 {
     "episode_order": "E6,E5,E4,E3,E2,E1",
-    "start_time": "2024-04-18T07:30:14.000Z",
+    "start_time": "",
     "Team 1": {
         "E6": {
-            "runner": "Anonymous",
+            "runner": "Tfresh",
             "end_time": ""
         },
         "E5": {
-            "runner": "Garrison",
+            "runner": "Anonymous",
             "end_time": ""
         },
         "E4": {
-            "runner": "Garrison",
+            "runner": "ERoadhouse",
             "end_time": ""
         },
         "E3": {
-            "runner": "Core",
+            "runner": "Saber",
             "end_time": ""
         },
         "E2": {
-            "runner": "Core",
+            "runner": "GildetPhantom",
             "end_time": ""
         },
         "E1": {
-            "runner": "Anonymous",
+            "runner": "Siedemnastek",
             "end_time": ""
         }
     },
     "Team 2": {
         "E6": {
-            "runner": "Charzight",
+            "runner": "FlamingLazer",
             "end_time": ""
         },
         "E5": {
-            "runner": "GildetPhantom",
+            "runner": "Rapho",
             "end_time": ""
         },
         "E4": {
-            "runner": "GildetPhantom",
+            "runner": "Zac",
             "end_time": ""
         },
         "E3": {
-            "runner": "Charzight",
+            "runner": "MyKey",
             "end_time": ""
         },
         "E2": {
-            "runner": "FlamingLazer",
+            "runner": "Jablaky",
             "end_time": ""
         },
         "E1": {
-            "runner": "FlamingLazer",
+            "runner": "carkoon",
             "end_time": ""
         }
     }

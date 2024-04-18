@@ -2,13 +2,16 @@ function loadTimer(timerDisplay) {
     let timerInterval = null;
 
     function startTimer(startTime = null) {
-        if (isNaN(startTime.getTime())) {
-            timerDisplay.textContent == "00:00:00"; //why does this not get displayed?
-            return;
-        } 
         clearInterval(timerInterval); 
 
         function calcTimerDisplay() {
+
+            if (isNaN(startTime.getTime())) {
+                //console.log("Invalid start time");
+                timerDisplay.textContent = "00:00:00";
+                return;
+            }
+
             fetchUTCTime().then(utcTime => {
                 const diff = new Date(utcTime - startTime);
                 const hours = diff.getUTCHours();

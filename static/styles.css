@@ -35,7 +35,6 @@ table {
     border-spacing: 15px 0;
     border: none;
     table-layout: fixed;
-    width: 1000px;
 
 }
 th, td {

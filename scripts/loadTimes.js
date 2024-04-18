@@ -29,10 +29,13 @@ function loadTimes(table){
         }
 
         const episodeOrder = jsonData["episode_order"].split(',');
-        const teams = Object.keys(jsonData);
+        const teams = Object.keys(jsonData);        
         teams.splice(teams.indexOf("start_time"),1)
         teams.splice(teams.indexOf("episode_order"),1)
         let lastEpisode = episodeOrder[episodeOrder.length - 1];
+
+        let w = 141 + 287 * teams.length;
+        table.style.width = w + "px";
 
         function updateRunners(){
             table.innerHTML = ""
