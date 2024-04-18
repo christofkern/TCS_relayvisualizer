@@ -7,8 +7,8 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
 <script src="../scripts/fetchUTCTime.js"></script> <!-- needed for timer.js -->
-<script src="../scripts/timer.js"></script>
-<!--<script src="../scripts/times.js"></script>-->
+<script src="../scripts/loadTimer.js"></script>
+<script src="../scripts/loadTimes.js"></script>
 
 <script>
 
@@ -37,7 +37,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     const timerDisplay = document.getElementById('timer');
-    loadTimer(timerDisplay);
+    loadTimer(timerDisplay);   
+
+    const episodeTable = document.getElementById('episodeTable');
+    loadTimes(episodeTable);
 });
 
 

@@ -23,7 +23,7 @@ async function fetchFormattedUTCTime() {
         const time = utcDateTime.slice(11, 19); // This includes hours, minutes, and seconds
 
         // Return the formatted UTC datetime string
-        console.log(`${year}-${month}-${day}T${time}`)
+        //console.log(`${year}-${month}-${day}T${time}`)
         return `${year}-${month}-${day}T${time}`;
     } catch (error) {
         console.error('Failed to fetch UTC time:', error);

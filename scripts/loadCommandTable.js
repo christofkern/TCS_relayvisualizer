@@ -1,19 +1,15 @@
 function loadCommandTable(data, commandTable) {
+    const episodeOrder = data["episode_order"].split(',');
     const teams = Object.keys(data);
-
-    // Clear existing table rows
-    commandTable.innerHTML = '';
-
-    // Get the episode order from the JSON data
     teams.splice(teams.indexOf("start_time"),1)
     teams.splice(teams.indexOf("episode_order"),1)
 
-    const episodeOrder = data["episode_order"].split(',');
-
+    // Clear existing table rows
+    commandTable.innerHTML = '';
+ 
     // Create table header
     const headerRow = document.createElement('tr');
-    const headers = ['Episode', ...teams];
-    console.log(episodeOrder)
+    const headers = ['Episode', ...teams];    
     
     headers.forEach((headerText, index) => {
         const th = document.createElement('th');

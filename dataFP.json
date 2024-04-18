@@ -1,52 +1,52 @@
 {
     "episode_order": "E6,E5,E4,E3,E2,E1",
-    "start_time": "2024-04-18T06:10:31.000Z",
+    "start_time": "2024-04-18T07:30:14.000Z",
     "Team 1": {
         "E6": {
             "runner": "Anonymous",
-            "end_time": "2024-04-18T06:37:14.000Z"
+            "end_time": ""
         },
         "E5": {
             "runner": "Garrison",
-            "end_time": "2024-04-18T06:37:35.000Z"
+            "end_time": ""
         },
         "E4": {
             "runner": "Garrison",
-            "end_time": "2024-04-18T06:37:38.000Z"
+            "end_time": ""
         },
         "E3": {
             "runner": "Core",
-            "end_time": "2024-04-18T06:37:39.000Z"
+            "end_time": ""
         },
         "E2": {
             "runner": "Core",
-            "end_time": "2024-04-18T06:46:13.000Z"
+            "end_time": ""
         },
         "E1": {
             "runner": "Anonymous",
-            "end_time": "2024-04-18T06:47:30.000Z"
+            "end_time": ""
         }
     },
     "Team 2": {
         "E6": {
             "runner": "Charzight",
-            "end_time": "2024-04-18T06:37:18.000Z"
+            "end_time": ""
         },
         "E5": {
             "runner": "GildetPhantom",
-            "end_time": "2024-04-18T06:37:18.000Z"
+            "end_time": ""
         },
         "E4": {
             "runner": "GildetPhantom",
-            "end_time": "2024-04-18T06:37:19.000Z"
+            "end_time": ""
         },
         "E3": {
             "runner": "Charzight",
-            "end_time": "2024-04-18T06:37:21.000Z"
+            "end_time": ""
         },
         "E2": {
             "runner": "FlamingLazer",
-            "end_time": "2024-04-18T06:37:33.000Z"
+            "end_time": ""
         },
         "E1": {
             "runner": "FlamingLazer",

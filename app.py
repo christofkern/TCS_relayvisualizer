@@ -97,7 +97,7 @@ def save_data(form_data):
 
         if entry_type == 'runner':
             structured_data[team][ep_num]['runner'] = form_data[key]
-        elif entry_type == 'endtime':                    
+        elif entry_type == 'endtime':                                
             structured_data[team][ep_num]['end_time'] = format_datetime(form_data[key])
 
     
