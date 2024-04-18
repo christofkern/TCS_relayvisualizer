@@ -6,33 +6,41 @@
 <title>Episode Times</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
+<script src="../scripts/fetchUTCTime.js"></script> <!-- needed for timer.js -->
+<script src="../scripts/timer.js"></script>
+<!--<script src="../scripts/times.js"></script>-->
 
 <script>
 
 
 document.addEventListener('DOMContentLoaded', function() {
-        var lastKnownModification = null;
-    
-        function fetchDataModificationTime() {
-            fetch('{{ url_for('data_last_modified') }}')
-                .then(response => response.json())
-                .then(data => {                    
-                    if (lastKnownModification === null) {
-                        lastKnownModification = data.lastModified;
-                        
-                    } else if (lastKnownModification !== data.lastModified) {
-                        window.location.reload();
-                    }
-                })
-                .catch(error => {
-                    console.error("Error fetching modification time:", error);
-                });
-        }
-    
-        //Check every second
-        setInterval(fetchDataModificationTime, 1000);
-    
+    var lastKnownModification = null;
+
+    function fetchDataModificationTime() {
+        fetch('{{ url_for('data_last_modified') }}')
+            .then(response => response.json())
+            .then(data => {                    
+                if (lastKnownModification === null) {
+                    lastKnownModification = data.lastModified;
+                    
+                } else if (lastKnownModification !== data.lastModified) {
+                    window.location.reload();
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching modification time:", error);
+            });
+    }
+
+    //Check every second
+    setInterval(fetchDataModificationTime, 1000);
+
+
+    const timerDisplay = document.getElementById('timer');
+    loadTimer(timerDisplay);
 });
+
+
 
 </script>
 
@@ -42,19 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<table id="episodeTable">
-    <tr>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-    </tr>
+<table id="episodeTable">   
 </table>
 </body>
 </html>
 
-<script src="../scripts/timer.js"></script>
-<script src="../scripts/times.js"></script>

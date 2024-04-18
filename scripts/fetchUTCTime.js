@@ -2,6 +2,18 @@ async function fetchUTCTime() {
     try {
         const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
         const data = await response.json();
+        const utcDateTime = new Date(data.datetime); // Convert datetime string to Date object
+        return utcDateTime;        
+    } catch (error) {
+        console.error('Failed to fetch UTC time:', error);
+        return null; // Return null or handle the error appropriately
+    }
+}
+
+async function fetchFormattedUTCTime() {
+    try {
+        const response = await fetch('http://worldtimeapi.org/api/timezone/Etc/UTC');
+        const data = await response.json();
         const utcDateTime = data.datetime; // This returns the datetime in ISO 8601 format
 
         // Extract the date and time in the desired format

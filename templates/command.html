@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Episode Timing Table</title>
 
-
-<script src="../scripts/loadCommandTable.js"></script>
 <script src="../scripts/fetchUTCTime.js"></script>
+<script src="../scripts/loadCommandTable.js"></script>
+
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.handleStartButton = function() {  
         event.preventDefault();
-        fetchUTCTime().then(utcTime => {
+        fetchFormattedUTCTime().then(utcTime => {
             const startTimeInput = document.querySelector('input[name="startTime"]');
             startTimeInput.value = utcTime;
             form.submit();
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Find the first input that is empty and set it with the current UTC time
         for (let input of endTimeInputs) {
             if (!input.value && input.name.includes(teamname)) {                     
-                fetchUTCTime().then(utcTime => {                        
+                fetchFormattedUTCTime().then(utcTime => {                        
                     input.value = utcTime;
                     form.submit();
                 });                       
@@ -38,20 +38,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }   
 
-
+    // Load JSON data from file and dynamically generate table on page load
+    fetch('/data')
+        .then(response => response.json())
+        .then(jsonData => {
+            const commandTable = document.getElementById('commandTable');
+            loadCommandTable(jsonData, commandTable);
+        })
+        .catch(error => {
+            console.error('Error loading JSON data:', error);
+    });
     
 });
 
-// Load JSON data from file and dynamically generate table on page load
-fetch('/data')
-    .then(response => response.json())
-    .then(jsonData => {
-        const commandTable = document.getElementById('commandTable');
-        loadCommandTable(jsonData, commandTable);
-    })
-    .catch(error => {
-        console.error('Error loading JSON data:', error);
-});
+
 
 </script>
 
