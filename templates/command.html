@@ -6,138 +6,56 @@
 <title>Episode Timing Table</title>
 
 
-
+<script src="../scripts/loadCommandTable.js"></script>
+<script src="../scripts/fetchUTCTime.js"></script>
 <script>
 
+document.addEventListener('DOMContentLoaded', function() {
+            
+    const form =  document.getElementById('form');
 
-function loadTableFromJSON(data) {
-    const commandTable = document.getElementById('commandTable');
-    const teams = Object.keys(data);
+    window.handleStartButton = function() {  
+        event.preventDefault();
+        fetchUTCTime().then(utcTime => {
+            const startTimeInput = document.querySelector('input[name="startTime"]');
+            startTimeInput.value = utcTime;
+            form.submit();
+        });           
+    };
 
-    // Clear existing table rows
-    commandTable.innerHTML = '';
-
-    // Get the episode order from the JSON data
-    teams.splice(teams.indexOf("start_time"),1)
-    teams.splice(teams.indexOf("episode_order"),1)
-
-    const episodeOrder = data["episode_order"].split(',');
-
-    // Create table header
-    const headerRow = document.createElement('tr');
-    const headers = ['Episode', ...teams];
-    console.log(episodeOrder)
-    
-    headers.forEach((headerText, index) => {
-        const th = document.createElement('th');
-        th.textContent = headerText;
-        headerRow.appendChild(th);        
-    });
-    commandTable.appendChild(headerRow);
-
-    // Create table rows for each episode
-    episodeOrder.forEach(episode => {
-        const tr = document.createElement('tr');
-        const tdEpisode = document.createElement('td');
-        tdEpisode.textContent = episode;
-
-        // Create table cells for each team
-        teams.forEach(team => {
-            const td = document.createElement('td');
-            const inputRunner = document.createElement('input');
-            inputRunner.type = 'text';
-            inputRunner.name = `${team}_${episode}_runner`;
-            inputRunner.value = data[team][episode].runner;
-            const inputEndTime = document.createElement('input');
-            inputEndTime.type = 'datetime-local';
-            inputEndTime.name = `${team}_${episode}_endtime`;
-            inputEndTime.step = '1';
-            inputEndTime.value = data[team][episode].end_time ? data[team][episode].end_time.replace('Z', '').split('.')[0] : '';
-            td.appendChild(inputRunner);
-            td.appendChild(inputEndTime);
-            tr.appendChild(td);
-        });
-
-        tr.insertBefore(tdEpisode, tr.firstChild); // Insert episode cell at the beginning of the row
-        commandTable.appendChild(tr);  
-    });
-
-    const trButtons = document.createElement('tr');
-    
-    const tdSave = document.createElement('td');
-    const saveButton = document.createElement('input');
-    saveButton.type = 'submit';
-    saveButton.value = 'Save Data';
-    tdSave.appendChild(saveButton);
-    trButtons.appendChild(tdSave);
-
-    teams.forEach(team => {
-        const tdSplit = document.createElement('td');
-        const splitButton = document.createElement('button');
-        splitButton.textContent = `Split ${team}`
-        splitButton.onclick = function(){
-            handleSplit(team);
-        }
-        tdSplit.appendChild(splitButton);
-        trButtons.appendChild(tdSplit);
-    });
-
-    commandTable.appendChild(trButtons);
-}
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-              
-        const form =  document.getElementById('form');
-
-        window.handleStartButton = function() {  
-            event.preventDefault();
-            fetchUTCTime().then(utcTime => {
-                const startTimeInput = document.querySelector('input[name="startTime"]');
-                startTimeInput.value = utcTime;
-                form.submit();
-            });           
-        };
-
-        window.handleSplit = function(teamname){
-            event.preventDefault();
-            const endTimeInputs = document.querySelectorAll(`input`);
-            // Find the first input that is empty and set it with the current UTC time
-            for (let input of endTimeInputs) {
-                if (!input.value && input.name.includes(teamname)) {                     
-                    fetchUTCTime().then(utcTime => {                        
-                        input.value = utcTime;
-                        form.submit();
-                    });                       
-                    break; 
-                }
+    window.handleSplit = function(teamname){
+        event.preventDefault();
+        const endTimeInputs = document.querySelectorAll(`input`);
+        // Find the first input that is empty and set it with the current UTC time
+        for (let input of endTimeInputs) {
+            if (!input.value && input.name.includes(teamname)) {                     
+                fetchUTCTime().then(utcTime => {                        
+                    input.value = utcTime;
+                    form.submit();
+                });                       
+                break; 
             }
-        }   
-      
-    });
-
-
-  
-
-    // Load JSON data from file and dynamically generate table on page load
-    fetch('/data')
-        .then(response => response.json())
-        .then(jsonData => {
-            loadTableFromJSON(jsonData);
-        })
-        .catch(error => {
-            console.error('Error loading JSON data:', error);
-        });
-
-    // Other event handlers...
-    
-
-
-    </script>
-
+        }
+    }   
 
 
     
+});
+
+// Load JSON data from file and dynamically generate table on page load
+fetch('/data')
+    .then(response => response.json())
+    .then(jsonData => {
+        const commandTable = document.getElementById('commandTable');
+        loadCommandTable(jsonData, commandTable);
+    })
+    .catch(error => {
+        console.error('Error loading JSON data:', error);
+});
+
+</script>
+
+
 </head>
 <body>
     <h1>Enter Run Data</h1>
@@ -175,4 +93,4 @@ function loadTableFromJSON(data) {
 </body>
 </html>
 
-<script src="../scripts/fetchUTCTime.js"></script>
+
