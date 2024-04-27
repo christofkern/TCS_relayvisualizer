@@ -80,7 +80,7 @@ function loadTimes(table){
                         let startTime = jsonData.start_time;      
                         let currentStart = lastEndTimes[team] || jsonData.start_time;
                         let end = new Date(data.end_time);
-                        if (activeRunner) end = new Date();
+                        if (activeRunner) end = new Date(); //TODO: make this use fetchUTCTime
                         cellLeft.textContent = formatDuration(jsonData.start_time, end, currentStart);
                         if (data.end_time !== "") cellLeft.classList.add('done');
                         cellRight.textContent = data.runner.toUpperCase();
