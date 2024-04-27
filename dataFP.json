@@ -15,11 +15,11 @@
             "end_time": ""
         },
         "E3": {
-            "runner": "Saber",
+            "runner": "GildetPhantom",
             "end_time": ""
         },
         "E2": {
-            "runner": "GildetPhantom",
+            "runner": "Saber",
             "end_time": ""
         },
         "E1": {
@@ -28,6 +28,32 @@
         }
     },
     "Team 2": {
+        "E6": {
+            "runner": "FlamingLazer",
+            "end_time": ""
+        },
+        "E5": {
+            "runner": "Rapho",
+            "end_time": ""
+        },
+        "E4": {
+            "runner": "Zac",
+            "end_time": ""
+        },
+        "E3": {
+            "runner": "MyKey",
+            "end_time": ""
+        },
+        "E2": {
+            "runner": "Jablaky",
+            "end_time": ""
+        },
+        "E1": {
+            "runner": "carkoon",
+            "end_time": ""
+        }
+    },
+    "Team 3": {
         "E6": {
             "runner": "FlamingLazer",
             "end_time": ""
