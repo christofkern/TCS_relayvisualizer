@@ -3,23 +3,23 @@
     "start_time": "",
     "Team 1": {
         "E6": {
-            "runner": "Tfresh",
-            "end_time": ""
-        },
-        "E5": {
             "runner": "Anonymous",
             "end_time": ""
         },
+        "E5": {
+            "runner": "Phantom",
+            "end_time": ""
+        },
         "E4": {
-            "runner": "ERoadhouse",
+            "runner": "Anonymous",
             "end_time": ""
         },
         "E3": {
-            "runner": "GildetPhantom",
+            "runner": "Siedemnastek",
             "end_time": ""
         },
         "E2": {
-            "runner": "Saber",
+            "runner": "Phantom",
             "end_time": ""
         },
         "E1": {
@@ -29,27 +29,27 @@
     },
     "Team 2": {
         "E6": {
-            "runner": "FlamingLazer",
+            "runner": "Gustative",
             "end_time": ""
         },
         "E5": {
-            "runner": "Rapho",
+            "runner": "Saber",
             "end_time": ""
         },
         "E4": {
-            "runner": "Zac",
-            "end_time": ""
-        },
-        "E3": {
-            "runner": "MyKey",
-            "end_time": ""
-        },
-        "E2": {
             "runner": "Jablaky",
             "end_time": ""
         },
+        "E3": {
+            "runner": "Gustative",
+            "end_time": ""
+        },
+        "E2": {
+            "runner": "Saber",
+            "end_time": ""
+        },
         "E1": {
-            "runner": "carkoon",
+            "runner": "Jablaky",
             "end_time": ""
         }
     },
@@ -63,15 +63,15 @@
             "end_time": ""
         },
         "E4": {
-            "runner": "Zac",
+            "runner": "carkoon",
             "end_time": ""
         },
         "E3": {
-            "runner": "MyKey",
+            "runner": "FlamingLazer",
             "end_time": ""
         },
         "E2": {
-            "runner": "Jablaky",
+            "runner": "Rapho",
             "end_time": ""
         },
         "E1": {
