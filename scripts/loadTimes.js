@@ -38,14 +38,15 @@ function loadTimes(table){
         table.style.width = w + "px";
 
         function updateRunners(){
-            table.innerHTML = ""
-            const row = table.insertRow();
-            row.insertCell()
+            table.innerHTML = "";
+            const headerRow = table.insertRow();
+            headerRow.id = "headerRow";
+            headerRow.insertCell();
             teams.forEach(team => {
-                const cell = row.insertCell();
+                const cell = headerRow.insertCell();
                 cell.classList.add('cell-team');
                 cell.textContent = team.toUpperCase();
-                row.insertCell()
+                headerRow.insertCell();
             });
             
             let lastEndTimes = {};
@@ -123,22 +124,17 @@ function loadTimes(table){
             
 
             //if all runner are finished, show the total time
-            if (Object.values(anyRunnerActive).some(val => !val)){
-                const row = table.insertRow();
-            
-                row.insertCell();
-                
-                teams.forEach(team => {
-                
+            if (Object.values(anyRunnerActive).some(val => !val)){          
+                const headerRow = document.getElementById('headerRow');
+                const cells = headerRow.querySelectorAll('td'); 
+                teams.forEach((team, index) => {                
                     if (!anyRunnerActive[team]){   
-                        const cell = row.insertCell();                
+                        const cellIndex = 2 + (index * 2);   
+                        const cell = cells[cellIndex];     
                         cell.textContent =  formatDuration(jsonData.start_time, new Date(jsonData[team][lastEpisode]["end_time"]), "", true);
-                        cell.classList.add('cell-end');
-                        row.insertCell();
-                    }else{
-                        row.insertCell();
-                        row.insertCell();
-                    }                    
+                        cell.classList.add('cell-end');     
+                        console.log(formatDuration(jsonData.start_time, new Date(jsonData[team][lastEpisode]["end_time"]), "", true)) ;
+                    }                                    
                 });
             }
             

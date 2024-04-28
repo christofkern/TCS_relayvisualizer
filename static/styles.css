@@ -128,7 +128,7 @@ table td {
     font-size: 30px;
     color: white; 
     text-align: center;
-     padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 
 
@@ -136,13 +136,10 @@ table td {
     font-family: 'IBMplexMono-Medium', sans-serif; 
     font-size: 20px;
     color: white; 
-    text-align: center; 
-    padding-top: 25px;
-    padding-left: 10px; 
-    padding-right: 10px;
+    text-align: center;     
     overflow: visible;
     white-space: nowrap;
-    width: 20px;
+    padding-bottom: 15px;
 }
 
 #timer {
