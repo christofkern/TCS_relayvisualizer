@@ -39,6 +39,15 @@ function loadTimes(table){
 
         function updateRunners(){
             table.innerHTML = ""
+            const row = table.insertRow();
+            row.insertCell()
+            teams.forEach(team => {
+                const cell = row.insertCell();
+                cell.classList.add('cell-team');
+                cell.textContent = team.toUpperCase();
+                row.insertCell()
+            });
+            
             let lastEndTimes = {};
             lastEndTimes = teams.reduce((acc, team) => {
                 acc[team] = "";

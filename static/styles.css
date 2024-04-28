@@ -123,6 +123,14 @@ table td {
     text-align: left;
 }
 
+.cell-team {
+    font-family: 'IBMplexSans-Bold', sans-serif;
+    font-size: 30px;
+    color: white; 
+    text-align: center;
+     padding-bottom: 15px;
+}
+
 
 .cell-end {
     font-family: 'IBMplexMono-Medium', sans-serif; 
